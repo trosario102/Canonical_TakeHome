@@ -1,0 +1,49 @@
+SSH Connectivity Test
+
+Description:
+This test case will verify the SSH connectivity of a client machine to a remote server using 
+both password-based authentication and key-based authentication.
+
+Tools Needed:
+OpenSSH client
+SSH Key generation tool i.e. ssh-keygen command (if using Linux)
+SSH Key Tutorial (if needed) - https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server
+
+Test Setup:
+1) Set up a remote server with SSH service enabled.
+2) Install OpenSSH software 
+3) Configure the server to allow both password and key-based authentication.
+4) Generate an SSH key pair for the testing machine.
+
+Test Teardown:
+1) Disconnect the SSH session from the remote server.
+2) Remove the generated SSH key pair from the testing machine.
+
+Pass/Fail Criteria:
+Pass:
++ Connection is established
++ Remote shell is opened.
++ The connection time is within ~5 seconds.
++ No error messages related to SSH authentication.
+
+Fail:
+- The connection fails or cannot be established.
+- The connection time exceeds ~5 seconds.
+- Error messages indicate authentication failures or other issues.
+
+Test Steps:
+1) Open terminal on the testing machine.
+2) Execute the SSH command: ssh username@server_ip
+3) Enter the password when prompted.
+4) Verify that a connection is established and a remote shell is opened.
+5) Record the connection time and any error messages.
+6) Close the connection to the remote server.
+7) Configure the remote server to allow key-based authentication.
+8) Copy the public key generated in the setup phase to the remote server using: ssh-copy-id
+9) Enter the password when prompted.
+10) Execute the SSH command: ssh -i ~/.ssh/id_rsa username@server_ip
+11) Verify that a connection is established and a remote shell is opened without a password.
+12) Record the connection time and any error messages.
+13) Close the connection to the remote server.
+
+
